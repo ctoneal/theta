@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "theta.rb"))
+
+theta = Theta::Base.new
+if ARGV.length > 0
+	theta.run(ARGV[1])
+else
+	theta.repl
+end
