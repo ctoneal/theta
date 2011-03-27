@@ -3,6 +3,8 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "theta.rb"))
 
 theta = Theta::Base.new
+# if a file was passed in, run it
+# otherwise, enter the repl
 if ARGV.length > 0
 	theta.run(ARGV[1])
 else

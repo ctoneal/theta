@@ -1,4 +1,6 @@
 module Theta
+	# An environment, stores defined items for a
+	# particular level
 	class Environment
 		def initialize(parent = nil)
 			@parent = parent
@@ -9,6 +11,7 @@ module Theta
 			end
 		end
 
+		# find an item in the environment
 		def find(name)
 			if @table.has_key?(name)
 				return @table[name]
@@ -19,6 +22,7 @@ module Theta
 			end
 		end
 
+		# define an item in the environment
 		def define(name, value)
 			@table[name] = value
 		end
