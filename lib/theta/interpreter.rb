@@ -2,9 +2,11 @@ module Theta
 	# interpret scheme code
 	class Interpreter
 
+		attr_accessor :current_environment
+		
 		#initialize the environment and the parser
 		def initialize
-			@global_environment = Environment.new
+			@global_environment = @current_environment = Environment.new
 			@parser = Parser.new
 			load_library
 		end
@@ -14,6 +16,7 @@ module Theta
 			library_directory = File.expand_path(File.join(File.dirname(__FILE__), "library"))
 			Dir.foreach(library_directory) do |file|
 				if file != "." && file != ".."
+					puts file
 					f = File.open(File.join(library_directory, file))
 					run(f.read)
 				end
@@ -37,20 +40,20 @@ module Theta
 		end
 
 		# evaluate the scheme expression
-		def evaluate(expression, environment=@global_environment)
+		def evaluate(expression)
 			if expression.is_a? Symbol
-				return environment.find(expression)
+				return @current_environment.find(expression)
 			elsif not expression.is_a? Array
 				return expression
 			end
 			case expression[0]
 			when :define
-				return environment.define(expression [1], evaluate(expression[2], environment))
+				return @current_environment.define(expression [1], evaluate(expression[2]))
 			when :ruby_func
 				return eval expression[1]
 			else
-				function = evaluate(expression[0], environment)
-				if function.lambda?
+				function = evaluate(expression[0])
+				if function.is_a? Proc
 					arguments = expression[1, expression.length]
 					function.call(arguments, self)
 				else

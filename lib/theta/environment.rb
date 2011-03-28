@@ -2,6 +2,9 @@ module Theta
 	# An environment, stores defined items for a
 	# particular level
 	class Environment
+	
+		attr_accessor :parent
+		
 		def initialize(parent = nil)
 			@parent = parent
 			@table = {}
