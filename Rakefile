@@ -16,8 +16,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "theta"
   gem.homepage = "http://github.com/ctoneal/theta"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Theta is a Lisp interpreter in Ruby}
+  gem.description = %Q{Theta was created as a learning project based off of lis.py and flea}
   gem.email = "ctoneal@gmail.com"
   gem.authors = ["Chris O'Neal"]
   gem.executables << 'theta'
