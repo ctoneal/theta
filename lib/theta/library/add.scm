@@ -2,9 +2,7 @@
 	(ruby_func "
 		lambda { |arguments, interpreter|
 			temp = arguments.map { |item| interpreter.evaluate(item) };
-			sum = 0;
-			temp.each { |n| sum += n};
-			return sum;
+			temp.inject { |result, n| result + n};
 		}
 	")
 )
