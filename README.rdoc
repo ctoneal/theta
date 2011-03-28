@@ -2,4 +2,22 @@
 
 Theta is a Lisp interpreter for Ruby.  It was heavily influenced by {lis.py}[http://norvig.com/lispy.html] and {flea}[https://github.com/aarongough/flea].  It was primarily made as a learning exercise.
 
+== How to use
 
+Theta is distributed as a gem, so install by typing:
+
+	% gem install theta
+	
+After installation, simply type theta to get to the interactive interpreter prompt.
+
+	% theta
+	theta> (define a 2)
+	2
+	theta> (+ a 3)
+	5
+	theta> (- 6 a)
+	4
+	
+To exit, simply press enter on a blank line.
+
+It's a little low on features currently, but I'll be adding more eventually!
