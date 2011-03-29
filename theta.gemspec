@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{theta}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris O'Neal"]
@@ -31,8 +31,15 @@ Gem::Specification.new do |s|
     "lib/theta/interpreter.rb",
     "lib/theta/library/add.scm",
     "lib/theta/library/divide.scm",
+    "lib/theta/library/equality.scm",
+    "lib/theta/library/greater_than.scm",
+    "lib/theta/library/greater_than_or_equal.scm",
+    "lib/theta/library/if.scm",
     "lib/theta/library/lambda.scm",
+    "lib/theta/library/less_than.scm",
+    "lib/theta/library/less_than_or_equal.scm",
     "lib/theta/library/multiply.scm",
+    "lib/theta/library/set.scm",
     "lib/theta/library/subtract.scm",
     "lib/theta/parser.rb",
     "test/helper.rb",
