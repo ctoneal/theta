@@ -9,7 +9,50 @@ module Theta
 	
 		# converts a string into an array of tokens
 		def tokenize(string)
-			return string.gsub("(", " ( ").gsub(")", " ) ").split
+#			string.gsub!(/\t/, "")
+#			string.gsub!(/\n/, "")
+			tokens = []
+			found_string = false
+			temp = ""
+			string.each_char do |char|
+				if found_string
+					if char == "\""
+						found_string = false
+						temp << char
+						if not temp.empty?
+							tokens << temp
+						end
+						temp = ""
+					else
+						temp << char
+					end
+				else
+					if char == "(" || char == ")"
+						if not temp.empty?
+							tokens << temp
+						end
+						tokens << char
+						next
+					elsif char == "\""
+						found_string = true
+						temp << char
+					elsif char == " "
+						if not temp.empty?
+							tokens << temp
+						end
+						temp = ""
+					elsif char == "\t" || char == "\n"
+						if not temp.empty?						
+							tokens << temp
+						end
+						temp = ""
+					else
+						temp << char
+					end
+				end
+			end
+			return tokens
+#			return string.gsub("(", " ( ").gsub(")", " ) ").split(/ /)
 		end
 
 		# reads an expression from an array of tokens (created
@@ -18,6 +61,8 @@ module Theta
 			if tokens.length == 0
 				raise SyntaxError, "unexpected EOF while reading"
 			end
+			tokens.delete_if { |item| item.strip == "" || item == []}
+#			puts "tokens: #{tokens}"
 			token = tokens.shift
 			if "(" == token
 				l = []
@@ -28,13 +73,23 @@ module Theta
 				return l
 			elsif ")" == token
 				raise SyntaxError, "unexpected )"
-			elsif "\"" == token
-				string = ""
-				until tokens[0] == "\""
-					string += " " + tokens.shift
-				end
-				tokens.shift
-				return string.gsub(/\n/, "")
+			elsif token.start_with?("\"")
+				string = token.gsub("\"", "")
+		#		test = true
+		#		while test
+		#			chunk = tokens.shift
+		#			if chunk.end_with?("\"")
+		#				chunk.gsub!("\"", "")
+		#				test = false
+		#			end
+		#			string += " " + chunk
+		#		end
+#				until tokens[0].end_with?("\"")
+#					string += " " + tokens.shift
+#				end
+#				tokens.shift
+				return string#.gsub(/\n/, "")
+		#		return token
 			else
 				return atom(token)
 			end
@@ -43,6 +98,7 @@ module Theta
 		# returns appropriate numeric object if a number, 
 		# otherwise returns a symbol
 		def atom(token)
+			token.gsub!(/\n\t/, "")
 			begin
 				return Integer(token)
 			rescue ArgumentError
