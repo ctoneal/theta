@@ -9,8 +9,6 @@ module Theta
 	
 		# converts a string into an array of tokens
 		def tokenize(string)
-#			string.gsub!(/\t/, "")
-#			string.gsub!(/\n/, "")
 			tokens = []
 			found_string = false
 			temp = ""
@@ -30,6 +28,7 @@ module Theta
 					if char == "(" || char == ")"
 						if not temp.empty?
 							tokens << temp
+							temp = ""
 						end
 						tokens << char
 						next
@@ -52,7 +51,6 @@ module Theta
 				end
 			end
 			return tokens
-#			return string.gsub("(", " ( ").gsub(")", " ) ").split(/ /)
 		end
 
 		# reads an expression from an array of tokens (created
@@ -62,7 +60,6 @@ module Theta
 				raise SyntaxError, "unexpected EOF while reading"
 			end
 			tokens.delete_if { |item| item.strip == "" || item == []}
-#			puts "tokens: #{tokens}"
 			token = tokens.shift
 			if "(" == token
 				l = []
@@ -74,22 +71,7 @@ module Theta
 			elsif ")" == token
 				raise SyntaxError, "unexpected )"
 			elsif token.start_with?("\"")
-				string = token.gsub("\"", "")
-		#		test = true
-		#		while test
-		#			chunk = tokens.shift
-		#			if chunk.end_with?("\"")
-		#				chunk.gsub!("\"", "")
-		#				test = false
-		#			end
-		#			string += " " + chunk
-		#		end
-#				until tokens[0].end_with?("\"")
-#					string += " " + tokens.shift
-#				end
-#				tokens.shift
-				return string#.gsub(/\n/, "")
-		#		return token
+				return token.gsub("\"", "")
 			else
 				return atom(token)
 			end

@@ -15,8 +15,9 @@ After installation, simply type theta to get to the interactive interpreter prom
 	2
 	theta> (+ a 3)
 	5
-	theta> (- 6 a)
-	4
+	theta> (define square (lambda (x) (* x x)))
+	theta> (square 3)
+	9
 	
 To exit, simply press enter on a blank line.
 

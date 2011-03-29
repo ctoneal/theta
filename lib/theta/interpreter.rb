@@ -40,20 +40,17 @@ module Theta
 
 		# evaluate the scheme expression
 		def evaluate(expression)
-			puts "expression: #{expression} class: #{expression.class}"
 			if expression.is_a? Symbol
-				puts "symbol"
 				return @current_environment.find(expression)
 			elsif not expression.is_a? Array
-				puts "other"
 				return expression
 			end
 
 			if expression.count == 1
 				if expression.is_a? Symbol
-					return @current_environment.find(expression)
+					return @current_environment.find(expression[0])
 				else
-					return expression
+					return expression[0]
 				end
 			end
 
@@ -61,17 +58,11 @@ module Theta
 			when :define
 				return @current_environment.define(expression [1], evaluate(expression[2]))
 			when :ruby_func
-				#return eval expression[1]
-				puts "exp: #{expression[1]}"
-				ex = eval expression[1]
-				puts "return #{ex}"
-				return ex
+				return eval expression[1]
 			else
 				function = evaluate(expression[0])
-				puts "returned: #{function} class: #{function.class}"
 				if function.is_a? Proc
 					arguments = expression[1, expression.length]
-					puts "args: #{arguments}"
 					return function.call(arguments, self)
 				else
 					raise RuntimeError, "#{expression[0]} is not a function"
