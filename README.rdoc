@@ -19,6 +19,6 @@ After installation, simply type theta to get to the interactive interpreter prom
 	theta> (square 3)
 	9
 	
-To exit, simply press enter on a blank line.
+To exit, simply type 'exit' at the prompt.
 
 It's a little low on features currently, but I'll be adding more eventually!

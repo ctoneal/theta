@@ -12,7 +12,11 @@ module Theta
 			tokens = []
 			found_string = false
 			temp = ""
+			# loop through each character passed
 			string.each_char do |char|
+				# if we're currently in a string and we hit the quote,
+				# it's the end of the string.
+				# move the string into the token array
 				if found_string
 					if char == "\""
 						found_string = false
@@ -21,10 +25,13 @@ module Theta
 							tokens << temp
 						end
 						temp = ""
+					# otherwise add the character to the temporary variable
 					else
 						temp << char
 					end
 				else
+					# if we hit parentheses, add whatever's in temp as a token
+					# then add the parentheses as a token
 					if char == "(" || char == ")"
 						if not temp.empty?
 							tokens << temp
@@ -32,19 +39,25 @@ module Theta
 						end
 						tokens << char
 						next
+					# if we hit a quote, we're beginning a string
+					# flip the found_string flag and begin adding to the temp variable
 					elsif char == "\""
 						found_string = true
 						temp << char
+					# space signals the end of a token, push the temp variable on the token queue
 					elsif char == " "
 						if not temp.empty?
 							tokens << temp
 						end
 						temp = ""
+					# ignore tabs or newlines, unless there's something in temp
+					# push that onto tokens
 					elsif char == "\t" || char == "\n"
 						if not temp.empty?						
 							tokens << temp
 						end
 						temp = ""
+					# add the character to temp to build a token
 					else
 						temp << char
 					end

@@ -20,11 +20,14 @@ module Theta
 		def repl
 			while true
 				print "theta> "
-				input = gets
-				input.strip!
-				if input.empty?
+				input = ""
+				input << gets.strip
+				if input == "exit"
 					puts "Exiting..."
-					break
+					return
+				end
+				if input.empty?
+					next
 				end
 				value = @interpreter.run(input)
 				unless value.nil?

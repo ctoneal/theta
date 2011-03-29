@@ -22,10 +22,10 @@ module Theta
 			end
 		end
 
-		# run a line of code
+		# run some code
 		def run(program)
-			expressions = parse(program)
-			return evaluate(expressions)
+			expression = parse(program)
+			return evaluate(expression)
 		end
 
 		# call the parser to make a string interpretable
