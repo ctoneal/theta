@@ -1,12 +1,40 @@
 #!/usr/bin/env ruby
-
+require 'optparse'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "theta.rb"))
 
+options = { :mode => :repl }
+op = OptionParser.new do |x|
+	x.banner = "theta <options>"
+	x.separator "\nUsing no options will start the interactive interpreter."
+	x.on("-f <file_path>", String, "Open a given file") do |f|
+		options[:mode] = :file
+		options[:file] = f
+	end
+	x.on("-c <code>", String, "Perform the given code") do |c|
+		options[:mode] = :code
+		options[:code] = c
+	end
+	x.on("-h", "Show this message") do
+		puts op
+		exit
+	end
+end
+begin
+	op.parse!(ARGV)
+rescue
+	puts "Could not parse command line arguments."
+	exit
+end
+
 theta = Theta::Base.new
-# if a file was passed in, run it
-# otherwise, enter the repl
-if ARGV.length > 0
-	theta.run(ARGV[1])
-else
+case options[:mode]
+when :repl
+	puts "Starting interactive interpreter..."
 	theta.repl
+when :file
+	puts "Running file..."
+	theta.load_file(options[:file])
+when :code
+	puts "Interpreting code..."
+	theta.run(options[:code])
 end

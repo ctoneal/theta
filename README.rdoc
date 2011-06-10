@@ -21,4 +21,19 @@ After installation, simply type theta to get to the interactive interpreter prom
 	
 To exit, simply type 'exit' at the prompt.
 
-It's a little low on features currently, but I'll be adding more eventually!
+Or, you can use the -f command line parameter to evaluate a file.
+
+	% theta -f test.scm
+	
+Alternately, you can use the -c parameter and pass in code directly.
+
+	% theta -c "(+ 3 2)"
+	
+And finally, you can use Theta inside your own Ruby programs, if that sounds like something you'd do.
+
+	require 'rubygems'
+	require 'theta'
+	
+	t = Theta::Interpreter.new
+	t.run "(define n 15)"
+	puts t.run "(+ 10 n)"	

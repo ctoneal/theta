@@ -1,3 +1,6 @@
+require File.expand_path(File.join(File.dirname(__FILE__), "environment.rb"))
+require File.expand_path(File.join(File.dirname(__FILE__), "parser.rb"))
+
 module Theta
 	# interpret scheme code
 	class Interpreter
