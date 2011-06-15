@@ -108,7 +108,8 @@ module Theta
 		# convert an expression back to a readable string
 		def to_string(expression)
 			if expression.is_a? Array
-				return "(" + " ".join(expression.map { |exp| to_string(exp) }) + ")"
+				expression.map { |exp| to_string(exp) }
+				return "(" + expression.join(" ") + ")"
 			else
 				return expression.to_s
 			end

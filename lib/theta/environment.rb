@@ -9,8 +9,8 @@ module Theta
 			@parent = parent
 			@table = {}
 			if @parent.nil?
-				define(":#t", true)
-				define(":#f", false)
+				define("#t".to_sym, true)
+				define("#f".to_sym, false)
 			end
 		end
 
