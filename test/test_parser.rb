@@ -23,12 +23,29 @@ module Theta
 				result = @parser.tokenize("(define a 1)")
 				assert_equal(["(", "define", "a", "1", ")"], result)
 			end
+			
+			should "be able to handle multiple statements at a time" do	
+				result = @parser.tokenize("(define a 1) (define b 2)")
+				assert_equal(["(", "define", "a", "1", ")","(", "define", "b", "2", ")"], result)
+			end
 		end
 		
 		context "read_from" do
 			should "turn a tokenized statement into an interpreter understandable array" do
 				result = @parser.read_from(["(", "define", "a", "1", ")"])
-				assert_equal([:define, :a, 1], result)
+				assert_equal([[:define, :a, 1]], result)
+			end
+			
+			should "be able to handle multiple statements at a time" do
+				tokens = @parser.tokenize("(define a 1) (define b 2)")
+				result = @parser.read_from(tokens)
+				assert_equal([[:define, :a, 1], [:define, :b, 2]], result)
+			end
+			
+			should "be able to handle nested expressions" do
+				tokens = @parser.tokenize("(+ 2 (+ 3 5))")
+				result = @parser.read_from(tokens)
+				assert_equal([[:+, 2, [:+, 3, 5]]], result)
 			end
 		end
 		

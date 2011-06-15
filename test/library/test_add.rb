@@ -8,19 +8,20 @@ module Theta
 		
 		should "add numbers correctly" do
 			result = @interpreter.run("(+ 2 2)")
-			assert_equal(4, result)
+			assert_equal(4, result[0])
 		end
 		
 		should "add a series of numbers" do
 			result = @interpreter.run("(+ 5 4 3 2 1)")
-			assert_equal(15, result)
+			assert_equal(15, result[0])
 		end
 		
 		should "add defined variables" do
-			@interpreter.run("(define a 1)")
-			@interpreter.run("(define b 2)")
-			result = @interpreter.run("(+ a b)")
-			assert_equal(3, result)
+			result = @interpreter.run(
+			"(define a 1)
+			 (define b 2)
+			 (+ a b)")
+			assert_equal(3, result[0])
 		end
 	end
 end

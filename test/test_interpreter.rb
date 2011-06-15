@@ -8,8 +8,8 @@ module Theta
 		
 		context "run" do
 			should "run code and return a result" do
-				result = @interpreter.run("(define a 1)")
-				assert_equal(1, result)
+				result = @interpreter.run("(+ 0 1)")
+				assert_equal(1, result[0])
 			end
 		end
 		

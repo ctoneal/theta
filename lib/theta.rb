@@ -16,7 +16,10 @@ module Theta
 		
 		# run given code
 		def run(program)
-			puts @interpreter.run(program)
+			output =  @interpreter.run(program)
+			unless output.empty?
+				output.each { |value| puts @interpreter.make_readable(value) }
+			end
 		end
 		
 		# start an interactive interpreter
@@ -36,11 +39,11 @@ module Theta
 					repl_help
 				else
 					begin
-						value = @interpreter.run(input)
+						output = @interpreter.run(input)
 					rescue SyntaxError
 					end
-					unless value.nil?
-						puts @interpreter.make_readable(value)
+					unless output.empty?
+						output.each { |value| puts @interpreter.make_readable(value) }
 					end
 				end
 			end

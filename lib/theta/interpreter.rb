@@ -28,7 +28,9 @@ module Theta
 		# run some code
 		def run(program)
 			expression = parse(program)
-			return evaluate(expression)
+			output = []
+			expression.each { |e| output << evaluate(e) }
+			return output.delete_if { |x| x.nil? }
 		end
 
 		# call the parser to make a string interpretable
@@ -59,7 +61,7 @@ module Theta
 
 			case expression[0]
 			when :define
-				return @current_environment.define(expression [1], evaluate(expression[2]))
+				@current_environment.define(expression [1], evaluate(expression[2]))
 			when :ruby_func
 				return eval expression[1]
 			else
@@ -71,6 +73,7 @@ module Theta
 					raise RuntimeError, "#{expression[0]} is not a function"
 				end
 			end
+			return nil
 		end
 	end
 end

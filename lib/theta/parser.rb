@@ -73,26 +73,49 @@ module Theta
 				raise SyntaxError, "unexpected EOF while reading"
 			end
 			tokens.delete_if { |item| item.strip == "" || item == []}
-			token = tokens.shift
-			if "(" == token
-				l = []
-				until tokens[0] == ")"
-					l << read_from(tokens)
+			tmp, expression = restructure tokens
+			return expression
+		end	
+			
+		def restructure(token_array, offset = 0)
+			statement = []
+			while offset < token_array.length
+				if token_array[offset] == "("
+					offset, tmp_array = restructure(token_array, offset + 1)
+					statement << tmp_array
+				elsif token_array[offset] == ")"
+					break
+				else
+					statement << atom(token_array[offset])
 				end
-				tokens.shift
-				return l
-			elsif ")" == token
-				raise SyntaxError, "unexpected )"
-			elsif token.start_with?("\"")
-				return token.gsub("\"", "")
-			else
-				return atom(token)
+				offset += 1
 			end
+			return offset, statement
 		end
+			
+#			token = tokens.shift
+#			if "(" == token
+#				l = []
+#				until tokens[0] == ")"
+#					l << read_from(tokens)
+#				end
+#				tokens.shift
+#				return l
+#			elsif ")" == token
+#				raise SyntaxError, "unexpected )"
+#			elsif token.start_with?("\"")
+#				return token.gsub("\"", "")
+#			else
+#				return atom(token)
+#			end
+#		end
 
 		# returns appropriate numeric object if a number, 
 		# otherwise returns a symbol
 		def atom(token)
+			if token.start_with?("\"")
+				return token.gsub("\"", "")
+			end
 			token.gsub!(/\n\t/, "")
 			begin
 				return Integer(token)
