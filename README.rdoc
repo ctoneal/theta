@@ -12,7 +12,6 @@ After installation, simply type theta to get to the interactive interpreter prom
 
 	% theta
 	theta> (define a 2)
-	2
 	theta> (+ a 3)
 	5
 	theta> (define square (lambda (x) (* x x)))
