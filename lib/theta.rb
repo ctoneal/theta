@@ -17,7 +17,7 @@ module Theta
 		# run given code
 		def run(program)
 			output =  @interpreter.run(program)
-			unless output.empty?
+			if not output.nil? and not output.empty? 
 				output.each { |value| puts @interpreter.make_readable(value) }
 			end
 		end
@@ -42,7 +42,7 @@ module Theta
 						output = @interpreter.run(input)
 					rescue SyntaxError
 					end
-					unless output.empty?
+					if not output.nil? and not output.empty? 
 						output.each { |value| puts @interpreter.make_readable(value) }
 					end
 				end

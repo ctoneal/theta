@@ -51,14 +51,6 @@ module Theta
 				return expression
 			end
 
-			if expression.count == 1
-				if expression.is_a? Symbol
-					return @current_environment.find(expression[0])
-				else
-					return expression[0]
-				end
-			end
-
 			case expression[0]
 			when :define
 				@current_environment.define(expression [1], evaluate(expression[2]))

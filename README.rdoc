@@ -1,6 +1,6 @@
 = Theta
 
-Theta is a Lisp interpreter for Ruby.  It was heavily influenced by {lis.py}[http://norvig.com/lispy.html] and {flea}[https://github.com/aarongough/flea].  It was primarily made as a learning exercise.
+Theta is a Lisp interpreter for Ruby (though it's really just a small subset of Lisp it interprets).  It was heavily influenced by {lis.py}[http://norvig.com/lispy.html] and {flea}[https://github.com/aarongough/flea].  It was primarily made as a learning exercise.
 
 == How to use
 
@@ -36,3 +36,77 @@ And finally, you can use Theta inside your own Ruby programs, if that sounds lik
 	t = Theta::Interpreter.new
 	t.run "(define n 15)"
 	puts t.run "(+ 10 n)"	
+	
+== Syntax
+
+Theta uses a very simplified Lisp-like syntax.
+
+=== Math
+
+Theta has your basic mathematical functions.
+
+	theta> (+ 2 2)
+	4
+	theta> (- 3 2)
+	1
+	theta> (* 4 2)
+	8
+	theta> (/ 4 2)
+	2
+	
+=== Defining Functions and Variables
+
+You also have the basic variable definition stuff.
+
+	theta> (define a 2)
+	theta> (+ a 3)
+	5
+	
+And functions.
+
+	theta> (define square (lambda (x) (* x x)))
+	theta> (square 3)
+	9
+	
+=== Conditionals and Truthiness
+
+We have your basic if statement that will evaluate the first piece of code 
+if true, otherwise the second (if you give it one).
+
+	theta> (if (= 2 2) (display "true") (display "not true"))
+	true
+	theta> (if (= 1 2) (display "true") (display "not true"))
+	not true
+	
+And some basic Boolean statements.
+
+	theta> (= 2 2)
+	true
+	theta> (> 1 2)
+	false
+	theta> (< 2 3)
+	true
+	theta> (>= 3 3 2)
+	true
+	theta> (<= 4 5 2)
+	false
+
+=== Input and Output
+
+Theta also has basic input and output.
+
+	theta> (display "poop")
+	poop
+	theta> (define a (input))
+	hi <this is user input>
+	theta> (display a)
+	hi
+	
+And a function to turn user input into an integer.
+
+	theta> (define a (string-to-num (input)))
+	123 <this is user input>
+	theta>(+ a 3)
+	126
+	
+	
