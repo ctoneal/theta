@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{theta}
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris O'Neal"]
-  s.date = %q{2011-06-10}
+  s.date = %q{2011-06-20}
   s.description = %q{Theta was created as a learning project based off of lis.py and flea}
   s.email = %q{ctoneal@gmail.com}
   s.executables = ["theta", "theta"]
@@ -30,19 +30,37 @@ Gem::Specification.new do |s|
     "lib/theta/environment.rb",
     "lib/theta/interpreter.rb",
     "lib/theta/library/add.scm",
+    "lib/theta/library/display.scm",
     "lib/theta/library/divide.scm",
     "lib/theta/library/equality.scm",
     "lib/theta/library/greater_than.scm",
     "lib/theta/library/greater_than_or_equal.scm",
     "lib/theta/library/if.scm",
+    "lib/theta/library/input.scm",
     "lib/theta/library/lambda.scm",
     "lib/theta/library/less_than.scm",
     "lib/theta/library/less_than_or_equal.scm",
     "lib/theta/library/multiply.scm",
     "lib/theta/library/set.scm",
+    "lib/theta/library/string-to-num.scm",
     "lib/theta/library/subtract.scm",
     "lib/theta/parser.rb",
     "test/helper.rb",
+    "test/library/test_add.rb",
+    "test/library/test_divide.rb",
+    "test/library/test_equality.rb",
+    "test/library/test_greater_than.rb",
+    "test/library/test_greater_than_or_equal.rb",
+    "test/library/test_if.rb",
+    "test/library/test_lambda.rb",
+    "test/library/test_less_than.rb",
+    "test/library/test_less_than_or_equal.rb",
+    "test/library/test_multiply.rb",
+    "test/library/test_set.rb",
+    "test/library/test_subtract.rb",
+    "test/test_environment.rb",
+    "test/test_interpreter.rb",
+    "test/test_parser.rb",
     "theta.gemspec"
   ]
   s.homepage = %q{http://github.com/ctoneal/theta}
@@ -51,7 +69,22 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{Theta is a Lisp interpreter in Ruby}
   s.test_files = [
-    "test/helper.rb"
+    "test/helper.rb",
+    "test/library/test_add.rb",
+    "test/library/test_divide.rb",
+    "test/library/test_equality.rb",
+    "test/library/test_greater_than.rb",
+    "test/library/test_greater_than_or_equal.rb",
+    "test/library/test_if.rb",
+    "test/library/test_lambda.rb",
+    "test/library/test_less_than.rb",
+    "test/library/test_less_than_or_equal.rb",
+    "test/library/test_multiply.rb",
+    "test/library/test_set.rb",
+    "test/library/test_subtract.rb",
+    "test/test_environment.rb",
+    "test/test_interpreter.rb",
+    "test/test_parser.rb"
   ]
 
   if s.respond_to? :specification_version then
