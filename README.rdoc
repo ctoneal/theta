@@ -14,7 +14,9 @@ After installation, simply type theta to get to the interactive interpreter prom
 	theta> (define a 2)
 	theta> (+ a 3)
 	5
-	theta> (define square (lambda (x) (* x x)))
+	theta> (define square 
+	theta>   (lambda (x) 
+	theta>     (* x x)))
 	theta> (square 3)
 	9
 	
@@ -45,8 +47,8 @@ Theta uses a very simplified Lisp-like syntax.
 
 Theta has your basic mathematical functions.
 
-	theta> (+ 2 2)
-	4
+	theta> (+ 2 2 5)
+	9
 	theta> (- 3 2)
 	1
 	theta> (* 4 2)
