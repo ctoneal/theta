@@ -6,39 +6,39 @@ Theta is a Lisp interpreter for Ruby (though it's really just a small subset of 
 
 Theta is distributed as a gem, so install by typing:
 
-	% gem install theta
-	
+    % gem install theta
+    
 After installation, simply type theta to get to the interactive interpreter prompt.
 
-	% theta
-	theta> (define a 2)
-	theta> (+ a 3)
-	5
-	theta> (define square 
-	theta>   (lambda (x) 
-	theta>     (* x x)))
-	theta> (square 3)
-	9
-	
+    % theta
+    theta> (define a 2)
+    theta> (+ a 3)
+    5
+    theta> (define square 
+    theta>   (lambda (x) 
+    theta>     (* x x)))
+    theta> (square 3)
+    9
+    
 To exit, simply type 'exit' at the prompt.
 
 Or, you can use the -f command line parameter to evaluate a file.
 
-	% theta -f test.scm
-	
+    % theta -f test.scm
+    
 Alternately, you can use the -c parameter and pass in code directly.
 
-	% theta -c "(+ 3 2)"
-	
+    % theta -c "(+ 3 2)"
+    
 And finally, you can use Theta inside your own Ruby programs, if that sounds like something you'd do.
 
-	require 'rubygems'
-	require 'theta'
-	
-	t = Theta::Interpreter.new
-	t.run "(define n 15)"
-	puts t.run "(+ 10 n)"	
-	
+    require 'rubygems'
+    require 'theta'
+
+    t = Theta::Interpreter.new
+    t.run "(define n 15)"
+    puts t.run "(+ 10 n)"   
+    
 == Syntax
 
 Theta uses a very simplified Lisp-like syntax.
@@ -47,68 +47,68 @@ Theta uses a very simplified Lisp-like syntax.
 
 Theta has your basic mathematical functions.
 
-	theta> (+ 2 2 5)
-	9
-	theta> (- 3 2)
-	1
-	theta> (* 4 2)
-	8
-	theta> (/ 4 2)
-	2
-	
+    theta> (+ 2 2 5)
+    9
+    theta> (- 3 2)
+    1
+    theta> (* 4 2)
+    8
+    theta> (/ 4 2)
+    2
+    
 === Defining Functions and Variables
 
 You also have the basic variable definition stuff.
 
-	theta> (define a 2)
-	theta> (+ a 3)
-	5
-	
+    theta> (define a 2)
+    theta> (+ a 3)
+    5
+    
 And functions.
 
-	theta> (define square (lambda (x) (* x x)))
-	theta> (square 3)
-	9
-	
+    theta> (define square (lambda (x) (* x x)))
+    theta> (square 3)
+    9
+    
 === Conditionals and Truthiness
 
 We have your basic if statement that will evaluate the first piece of code 
 if true, otherwise the second (if you give it one).
 
-	theta> (if (= 2 2) (display "true") (display "not true"))
-	true
-	theta> (if (= 1 2) (display "true") (display "not true"))
-	not true
-	
+    theta> (if (= 2 2) (display "true") (display "not true"))
+    true
+    theta> (if (= 1 2) (display "true") (display "not true"))
+    not true
+    
 And some basic Boolean statements.
 
-	theta> (= 2 2)
-	true
-	theta> (> 1 2)
-	false
-	theta> (< 2 3)
-	true
-	theta> (>= 3 3 2)
-	true
-	theta> (<= 4 5 2)
-	false
+    theta> (= 2 2)
+    true
+    theta> (> 1 2)
+    false
+    theta> (< 2 3)
+    true
+    theta> (>= 3 3 2)
+    true
+    theta> (<= 4 5 2)
+    false
 
 === Input and Output
 
 Theta also has basic input and output.
 
-	theta> (display "poop")
-	poop
-	theta> (define a (input))
-	hi <this is user input>
-	theta> (display a)
-	hi
-	
+    theta> (display "poop")
+    poop
+    theta> (define a (input))
+    hi <this is user input>
+    theta> (display a)
+    hi
+    
 And a function to turn user input into an integer.
 
-	theta> (define a (string-to-num (input)))
-	123 <this is user input>
-	theta>(+ a 3)
-	126
-	
-	
+    theta> (define a (string-to-num (input)))
+    123 <this is user input>
+    theta>(+ a 3)
+    126
+    
+    
